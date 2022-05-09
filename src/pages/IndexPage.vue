@@ -1,49 +1,54 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
+  <q-page padding class="row items-center justify-evenly">
+    <q-spinner-dots v-if="loading"
+      color="accent"
+      size="4em"
+    />
+
+    <div v-else>
+      <div class="row">
+        <div v-for="post in allPosts" :key="post.id" class="col-6">
+          <post-preview
+            :post="post">
+          </post-preview>
+        </div>
+      </div>
+
+      <div class="q-pa-lg flex flex-center">
+        <q-pagination
+          :model-value="currentPage"
+          color="primary"
+          :max="100/postsPerPage"
+          :max-pages="5"
+          direction-links
+          boundary-links
+          @update:model-value="handlePageChange"
+        />
+      </div>
+
+      <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
+        <q-btn fab icon="keyboard_arrow_up" color="accent" />
+      </q-page-scroller>
+    </div>
   </q-page>
 </template>
 
-<script lang="ts">
-import { Todo, Meta } from 'components/models';
-import ExampleComponent from 'components/ExampleComponent.vue';
-import { defineComponent, ref } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { usePostsStore } from 'stores/posts';
+import PostPreview from 'components/PostPreview.vue';
 
-export default defineComponent({
-  name: 'IndexPage',
-  components: { ExampleComponent },
-  setup() {
-    const todos = ref<Todo[]>([
-      {
-        id: 1,
-        content: 'ct1'
-      },
-      {
-        id: 2,
-        content: 'ct2'
-      },
-      {
-        id: 3,
-        content: 'ct3'
-      },
-      {
-        id: 4,
-        content: 'ct4'
-      },
-      {
-        id: 5,
-        content: 'ct5'
-      }
-    ]);
-    const meta = ref<Meta>({
-      totalCount: 1200
-    });
-    return { todos, meta };
-  }
-});
+const currentPage = ref(1);
+const postsPerPage = ref(10);
+
+const { allPosts, loading } = storeToRefs(usePostsStore());
+const { fetchPosts } = usePostsStore();
+
+fetchPosts(currentPage.value, postsPerPage.value);
+
+function handlePageChange(value: string) {
+  currentPage.value = Number(value);
+  fetchPosts(currentPage.value, postsPerPage.value);
+}
 </script>
