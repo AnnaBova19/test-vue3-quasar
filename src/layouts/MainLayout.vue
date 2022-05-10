@@ -1,6 +1,6 @@
 <template>
-  <q-layout view="hhh lpR fFf">
-    <q-header reveal elevated class="bg-primary text-white">
+  <q-layout view="hHh lpR fFf">
+    <q-header elevated class="bg-primary text-white">
       <q-toolbar class="glossy">
         <q-btn dense flat round icon="edit_note" />
         <q-toolbar-title>
@@ -8,6 +8,9 @@
             Posts App
           </router-link>
         </q-toolbar-title>
+        <q-btn stretch flat label="Posts" to="/posts"/>
+        <q-separator dark vertical inset />
+        <q-btn stretch flat label="Authors" to="/authors"/>
       </q-toolbar>
     </q-header>
 
@@ -30,6 +33,7 @@
 
 <style scoped lang="scss">
 .q-toolbar__title {
+  flex: initial;
   a {
     color: white;
     text-decoration: none;

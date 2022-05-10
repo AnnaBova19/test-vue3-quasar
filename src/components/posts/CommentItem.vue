@@ -1,6 +1,6 @@
 <template>
   <q-item class="q-mb-sm">
-    <q-item-section avatar>
+    <q-item-section avatar top>
       <q-avatar color="primary" text-color="white">
         {{ avatarLetter }}
       </q-avatar>
@@ -17,9 +17,9 @@
     <q-item-section side top>
       <q-rating
         v-model="getRating"
-        size="1em"
+        size="xs"
         :max="5"
-        color="primary"
+        color="accent"
         readonly
       />
     </q-item-section>
@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Comment } from '../models/Comment';
+import { Comment } from 'src/models/Comment';
 
 const props = defineProps<{
   comment: Comment,

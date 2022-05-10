@@ -1,36 +1,35 @@
 import { defineStore } from 'pinia';
+import { Author } from 'src/models/Author';
 import { Post } from 'src/models/Post';
 
-export type PostsState = {
+export type AuthorsState = {
+  authors: Array<Author>;
+  author?: Author;
   posts: Array<Post>;
-  post?: Post;
   loading: boolean;
   error: string;
 };
 
-export const usePostsStore = defineStore('posts', {
+export const useAuthorsStore = defineStore('authors', {
   state: () => (
     {
+      authors: [],
+      author: undefined,
       posts: [],
-      post: undefined,
       loading: false,
       error: ''
-    } as PostsState
+    } as AuthorsState
   ),
   getters: {
-    allPosts: (state) => state.posts,
-    postsQuantity: (state) => state.posts.length,
-    currentPost: (state) => state.post,
-    getPostsPerAuthor: (state) => {
-      return (authorId: string) => state.posts.filter((post: Post) => post.userId === authorId);
-    }
+    allAuthors: (state) => state.authors,
+    currentAuthor: (state) => state.author,
   },
   actions: {
-    async fetchPosts() {
-      this.posts = [];
+    async fetchAuthors() {
+      this.authors = [];
       this.loading = true;
       try {
-        this.posts = await fetch('https://jsonplaceholder.typicode.com/posts')
+        this.authors = await fetch('https://jsonplaceholder.typicode.com/users')
         .then((response) => response.json()) 
       } catch (error) {
         if (error instanceof Error) {
@@ -40,11 +39,11 @@ export const usePostsStore = defineStore('posts', {
         this.loading = false;
       }
     },
-    async fetchPost(postId: number) {
-      this.post = undefined;
+    async fetchAuthor(authorId: number) {
+      this.author = undefined;
       this.loading = true;
       try {
-        this.post = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+        this.author = await fetch(`https://jsonplaceholder.typicode.com/users/${authorId}`)
         .then((response) => response.json())
       } catch (error) {
         if (error instanceof Error) {
@@ -53,6 +52,6 @@ export const usePostsStore = defineStore('posts', {
       } finally {
         this.loading = false;
       }
-    }
+    },
   },
 });

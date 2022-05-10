@@ -17,7 +17,7 @@
 
     <q-card-section>
       <div class="column">
-        <div class="text-h5 text-accent text-bold">
+        <div class="text-h5 text-primary text-bold q-mb-md">
           {{ post.title }}
         </div>
         <div class="text-body1">{{ post.body }}</div>
@@ -57,11 +57,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useCommentsStore } from 'stores/comments';
-import { Post } from '../models/Post';
-import CommentItem from 'components/CommentItem.vue';
+import { Post } from 'src/models/Post';
+import CommentItem from 'components/posts/CommentItem.vue';
 
 const props = defineProps<{
   post: Post,
@@ -70,7 +70,7 @@ const props = defineProps<{
 const actionBtns = [
     {
     title: 'Edit',
-    color: 'accent',
+    color: 'primary',
     icon: 'edit',
   },
     {
@@ -90,7 +90,5 @@ function toggleComments(): void {
   }
 }
 
-onMounted(() => {
-  useCommentsStore().$reset();
-});
+useCommentsStore().$reset();
 </script>
