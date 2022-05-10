@@ -10,6 +10,7 @@ const routes: RouteRecordRaw[] = [
       { path: 'author/:id', component: () => import('pages/authors/AuthorPage.vue') },
       { path: 'posts', component: () => import('pages/posts/PostsPage.vue'), name: 'posts' },
       { path: 'post/:id', component: () => import('pages/posts/PostPage.vue') },
+      { path: 'post/:id/edit', component: () => import('pages/posts/EditPostPage.vue') },
       { path: 'new_post', component: () => import('pages/posts/NewPostPage.vue') },
     ],
   },

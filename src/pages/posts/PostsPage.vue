@@ -19,10 +19,10 @@
       <div v-else>
         <div class="row">
           <div v-for="post in postsOnPage" :key="post.id" class="col-xs-12 col-md-6">
-            <post-preview
+            <PostPreview
               :post="post"
-              @click="router.push(`/post/${post.id}`)">
-            </post-preview>
+              @click="router.push(`/post/${post.id}`)"
+            />
           </div>
         </div>
 
@@ -53,9 +53,9 @@ import { usePostsStore } from 'stores/posts';
 import { Post } from 'src/models/Post';
 import PostPreview from 'components/posts/PostPreview.vue';
 
+const router = useRouter();
 const currentPage = ref(1);
 const postsPerPage = ref(10);
-const router = useRouter();
 
 const { allPosts, postsQuantity, loading } = storeToRefs(usePostsStore());
 const { fetchPosts } = usePostsStore();

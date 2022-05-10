@@ -13,10 +13,10 @@
       <div v-else>
         <div class="row">
           <div v-for="author in allAuthors" :key="author.id" class="col-xs-12 col-md-6">
-            <author-card
+            <AuthorCard
               :author="author"
-              @click="router.push(`/author/${author.id}`)">
-            </author-card>
+              @click="router.push(`/author/${author.id}`)"
+            />
           </div>
         </div>
 

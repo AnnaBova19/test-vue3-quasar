@@ -8,7 +8,8 @@
         size="sm"
         :color="btn.color"
         :icon="btn.icon"
-        class="q-ma-xs">
+        class="q-ma-xs"
+        @click="btn.action">
         <q-tooltip anchor="top middle" self="bottom middle" :offset="[5,5]">
           {{ btn.title }}
         </q-tooltip>
@@ -58,6 +59,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useCommentsStore } from 'stores/comments';
 import { Post } from 'src/models/Post';
@@ -67,16 +69,19 @@ const props = defineProps<{
   post: Post,
 }>();
 
+const router = useRouter();
 const actionBtns = [
     {
     title: 'Edit',
     color: 'primary',
     icon: 'edit',
+    action: () => router.push(`/post/${props.post.id}/edit`),
   },
     {
     title: 'Delete',
     color: 'grey',
     icon: 'delete',
+    action: () => ({}),
   }
 ];
 const expanded = ref(false);

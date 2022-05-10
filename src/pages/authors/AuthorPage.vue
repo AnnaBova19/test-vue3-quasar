@@ -6,13 +6,14 @@
     />
 
     <div v-if="!!currentAuthor && !loading">
-      <author-card :author="currentAuthor"></author-card>
+      <AuthorCard :author="currentAuthor"
+      />
       <div class="row">
         <div v-for="post in getPostsPerAuthor(currentAuthor.id)" :key="post.id" class="col-xs-12 col-md-6">
-          <post-preview
+          <PostPreview
             :post="post"
-            @click="router.push(`/post/${post.id}`)">
-          </post-preview>
+            @click="router.push(`/post/${post.id}`)" 
+          />
         </div>
       </div>
     </div>

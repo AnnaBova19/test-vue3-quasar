@@ -5,9 +5,9 @@
       size="4em"
     />
 
-    <div v-if="!!currentPost && !loading">
-      <post-card :post="currentPost"></post-card>
-    </div>
+    <PostCard v-if="!!currentPost && !loading"
+      :post="currentPost"
+    />
   </q-page>
 </template>
 
