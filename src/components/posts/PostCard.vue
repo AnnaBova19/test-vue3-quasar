@@ -70,6 +70,9 @@ const props = defineProps<{
 }>();
 
 const router = useRouter();
+const commentsStore = useCommentsStore();
+
+const expanded = ref(false);
 const actionBtns = [
     {
     title: 'Edit',
@@ -84,9 +87,9 @@ const actionBtns = [
     action: () => ({}),
   }
 ];
-const expanded = ref(false);
-const { postComments } = storeToRefs(useCommentsStore());
-const { fetchPostComments } = useCommentsStore();
+
+const { postComments } = storeToRefs(commentsStore);
+const { fetchPostComments } = commentsStore;
 
 function toggleComments(): void {
   expanded.value = !expanded.value;

@@ -54,11 +54,13 @@ import { Post } from 'src/models/Post';
 import PostPreview from 'components/posts/PostPreview.vue';
 
 const router = useRouter();
+const postsStore = usePostsStore();
+
 const currentPage = ref(1);
 const postsPerPage = ref(10);
 
-const { allPosts, postsQuantity, loading } = storeToRefs(usePostsStore());
-const { fetchPosts } = usePostsStore();
+const { allPosts, postsQuantity, loading } = storeToRefs(postsStore);
+const { fetchPosts } = postsStore;
 
 const totalPages = computed<number>(() => {
   return postsQuantity.value / postsPerPage.value;

@@ -18,8 +18,10 @@ import { usePostsStore } from 'stores/posts';
 import PostCard from 'components/posts/PostCard.vue';
 
 const route = useRoute();
-const { currentPost, loading } = storeToRefs(usePostsStore());
-const { fetchPost } = usePostsStore();
+const postsStore = usePostsStore();
+
+const { currentPost, loading } = storeToRefs(postsStore);
+const { fetchPost } = postsStore;
 
 fetchPost(Number(route.params.id));
 </script>

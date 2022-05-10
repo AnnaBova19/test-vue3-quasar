@@ -35,9 +35,10 @@ import { useAuthorsStore } from 'stores/authors';
 import AuthorCard from 'components/authors/AuthorCard.vue';
 
 const router = useRouter();
+const authorsStore = useAuthorsStore();
 
-const { allAuthors, loading } = storeToRefs(useAuthorsStore());
-const { fetchAuthors } = useAuthorsStore();
+const { allAuthors, loading } = storeToRefs(authorsStore);
+const { fetchAuthors } = authorsStore;
 
 if (!allAuthors.value.length) {
   fetchAuthors();

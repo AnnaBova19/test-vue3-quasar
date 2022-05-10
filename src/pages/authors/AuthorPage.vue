@@ -30,10 +30,13 @@ import PostPreview from 'components/posts/PostPreview.vue';
 
 const router = useRouter();
 const route = useRoute();
-const { currentAuthor, loading } = storeToRefs(useAuthorsStore());
-const { allPosts, getPostsPerAuthor } = storeToRefs(usePostsStore());
-const { fetchAuthor } = useAuthorsStore();
-const { fetchPosts } = usePostsStore();
+const authorsStore = useAuthorsStore();
+const postsStore = usePostsStore();
+
+const { currentAuthor, loading } = storeToRefs(authorsStore);
+const { allPosts, getPostsPerAuthor } = storeToRefs(postsStore);
+const { fetchAuthor } = authorsStore;
+const { fetchPosts } = postsStore;
 
 fetchAuthor(Number(route.params.id));
 if (!allPosts.value.length) {

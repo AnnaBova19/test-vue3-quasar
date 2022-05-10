@@ -26,10 +26,13 @@ import { Post } from 'src/models/Post';
 import PostForm from 'components/posts/PostForm.vue';
 
 const route = useRoute();
-const { currentPost, loading } = storeToRefs(usePostsStore());
-const { fetchPost } = usePostsStore();
+const postsStore = usePostsStore();
+
+const { currentPost, loading } = storeToRefs(postsStore);
+const { fetchPost } = postsStore;
 
 fetchPost(Number(route.params.id));
+
 function editPost(event: Partial<Post>): void {
   // TO DO: edit post
   console.log(event);
