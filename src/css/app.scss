@@ -1,1 +1,6 @@
 // app global css in SCSS form
+.text-no-wrap {
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden; 
+}

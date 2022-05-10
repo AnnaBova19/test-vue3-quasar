@@ -1,21 +1,23 @@
 <template>
   <q-card class="bg-grey-1 q-ma-md q-pa-sm">
-    <q-card-actions align="right">
+    <div class="row justify-end">
       <q-btn
         round
         glossy
         size="sm"
         color="primary"
         icon="visibility"
+        class="q-ma-xs"
         @click="viewPost">
         <q-tooltip anchor="top middle" self="bottom middle" :offset="[5,5]">
           View post
         </q-tooltip>
       </q-btn>
-    </q-card-actions>
-    <q-card-section class="q-pt-none">
+    </div>
+    
+    <q-card-section>
       <div class="column">
-        <div class="text-h6 text-accent text-bold">
+        <div class="text-h6 text-accent text-bold text-no-wrap">
           {{ post.title }}
         </div>
         <div>{{ post.body }}</div>
@@ -34,7 +36,7 @@ const props = defineProps<{
 
 const router = useRouter();
 
-function viewPost() {
+function viewPost(): void {
   router.push(`/post/${props.post.id}`);
 }
 </script>

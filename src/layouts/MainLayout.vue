@@ -1,10 +1,10 @@
 <template>
   <q-layout view="hhh lpR fFf">
     <q-header reveal elevated class="bg-primary text-white">
-      <q-toolbar>
+      <q-toolbar class="glossy">
         <q-btn dense flat round icon="edit_note" />
         <q-toolbar-title>
-          <router-link to="/">
+          <router-link exact to="/">
             Posts App
           </router-link>
         </q-toolbar-title>
