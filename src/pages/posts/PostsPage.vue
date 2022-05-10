@@ -20,7 +20,8 @@
         <div class="row">
           <div v-for="post in postsOnPage" :key="post.id" class="col-xs-12 col-md-6">
             <post-preview
-              :post="post">
+              :post="post"
+              @click="router.push(`/post/${post.id}`)">
             </post-preview>
           </div>
         </div>
@@ -46,6 +47,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { usePostsStore } from 'stores/posts';
 import { Post } from 'src/models/Post';
@@ -53,6 +55,7 @@ import PostPreview from 'components/posts/PostPreview.vue';
 
 const currentPage = ref(1);
 const postsPerPage = ref(10);
+const router = useRouter();
 
 const { allPosts, postsQuantity, loading } = storeToRefs(usePostsStore());
 const { fetchPosts } = usePostsStore();

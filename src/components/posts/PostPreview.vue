@@ -3,9 +3,7 @@
     <q-card-section>
       <div class="column">
         <div class="text-h6 text-bold text-no-wrap post-title">
-          <router-link :to="`/post/${post.id}`">
-            {{ post.title }}
-          </router-link>
+          {{ post.title }}
           <q-tooltip anchor="top start" self="bottom start" :offset="[5,5]">
             {{ post.title }}
           </q-tooltip>
@@ -26,18 +24,13 @@ defineProps<{
 
 <style scoped lang="scss">
 .post-preview {
+  cursor: pointer;
   .post-title {
-    flex: initial;
-    a {
-      color: $primary;
-      text-decoration: none;
-    }
+    color: $primary;
   }
   &:hover {
     .post-title {
-      a {
-        color: $accent;
-      }
+      color: $accent;
     }
   }
 }

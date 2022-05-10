@@ -14,7 +14,8 @@
         <div class="row">
           <div v-for="author in allAuthors" :key="author.id" class="col-xs-12 col-md-6">
             <author-card
-              :author="author">
+              :author="author"
+              @click="router.push(`/author/${author.id}`)">
             </author-card>
           </div>
         </div>
@@ -28,9 +29,12 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useAuthorsStore } from 'stores/authors';
 import AuthorCard from 'components/authors/AuthorCard.vue';
+
+const router = useRouter();
 
 const { allAuthors, loading } = storeToRefs(useAuthorsStore());
 const { fetchAuthors } = useAuthorsStore();

@@ -15,7 +15,7 @@
     </q-header>
 
     <q-page-container>
-      <router-view />
+      <router-view keep-alive />
     </q-page-container>
 
     <q-footer elevated class="bg-grey-8 text-white">

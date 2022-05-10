@@ -9,9 +9,7 @@
 
       <q-item-section>
         <q-item-label class="text-h6 text-no-wrap author-name">
-          <router-link :to="`/author/${author.id}`">
-            {{ author.name }}
-          </router-link>
+          {{ author.name }}
         </q-item-label>
         <q-item-label class="text-overline">{{ `@${author.username}` }}</q-item-label>
       </q-item-section>
@@ -58,17 +56,13 @@ defineProps<{
 
 <style scoped lang="scss">
 .author-card {
+  cursor: pointer;
   .author-name {
-    a {
-      color: $primary;
-      text-decoration: none;
-    }
+    color: $primary;
   }
   &:hover {
     .author-name {
-      a {
-        color: $accent;
-      }
+      color: $accent;
     }
   }
 }
