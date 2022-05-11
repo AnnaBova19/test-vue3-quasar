@@ -55,6 +55,12 @@
       </div>
     </q-slide-transition>
   </q-card>
+
+  <DeleteDialog
+    :dialogVisible="deleteDialogVisible"
+    @close="deleteDialogVisible = false"
+    @onDeleteAction="deletePost"
+  />
 </template>
 
 <script setup lang="ts">
@@ -64,6 +70,7 @@ import { storeToRefs } from 'pinia';
 import { useCommentsStore } from 'stores/comments';
 import { Post } from 'src/models/Post';
 import CommentItem from 'components/posts/CommentItem.vue';
+import DeleteDialog from 'components/dialogs/DeleteDialog.vue';
 
 const props = defineProps<{
   post: Post,
@@ -73,6 +80,7 @@ const router = useRouter();
 const commentsStore = useCommentsStore();
 
 const expanded = ref(false);
+const deleteDialogVisible = ref(false);
 const actionBtns = [
     {
     title: 'Edit',
@@ -83,8 +91,8 @@ const actionBtns = [
     {
     title: 'Delete',
     color: 'grey',
-    icon: 'delete',
-    action: () => ({}),
+    icon: 'delete_outline',
+    action: () => deleteDialogVisible.value = true,
   }
 ];
 
@@ -96,6 +104,10 @@ function toggleComments(): void {
   if (!postComments.value.length) {
     fetchPostComments(props.post.id);
   }
+}
+
+function deletePost(): void {
+  // TO DO: delete post
 }
 
 useCommentsStore().$reset();
