@@ -5,7 +5,7 @@
         <q-btn dense flat round icon="edit_note" />
         <q-toolbar-title>
           <router-link exact to="/">
-            Posts App
+            <span class="text-bold">Posts App</span>
           </router-link>
         </q-toolbar-title>
         <q-btn stretch flat label="Posts" to="/posts"/>
@@ -18,7 +18,7 @@
       <router-view keep-alive />
     </q-page-container>
 
-    <q-footer elevated class="bg-grey-8 text-white">
+    <q-footer elevated>
       <q-toolbar>
         <q-toolbar-title>
           &copy; 2022
