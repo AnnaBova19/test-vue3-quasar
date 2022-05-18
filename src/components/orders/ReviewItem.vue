@@ -7,11 +7,11 @@
     </q-item-section>
 
     <q-item-section>
-      <q-item-label class="text-subtitle2">{{ comment.name }}</q-item-label>
+      <q-item-label class="text-subtitle2">{{ review.name }}</q-item-label>
       <q-item-label caption lines="1" class="q-mb-sm">
-        {{ comment.email }}
+        {{ review.email }}
       </q-item-label>
-      <q-item-label>{{ comment.body }}</q-item-label>
+      <q-item-label>{{ review.body }}</q-item-label>
     </q-item-section>
 
     <q-item-section side top>
@@ -30,15 +30,15 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Comment } from 'src/models/Comment';
+import { Review } from 'src/models/Review';
 
 const props = defineProps<{
-  comment: Comment,
+  review: Review,
   hasSeparator: boolean,
 }>();
 
 const avatarLetter = computed<string>(() => {
-  return props.comment.name.substring(0, 1).toUpperCase();
+  return props.review.name.substring(0, 1).toUpperCase();
 });
 
 const getRating = computed<number>(() => {

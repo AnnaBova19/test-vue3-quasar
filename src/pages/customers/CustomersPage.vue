@@ -1,7 +1,7 @@
 <template>
   <q-page padding class="column">
     <div class="row justify-between q-mb-md">
-      <div class="text-h3 text-primary">Authors</div>
+      <div class="text-h3 text-primary">Customers</div>
     </div>
 
     <div class="row justify-evenly">
@@ -12,10 +12,10 @@
 
       <div v-else>
         <div class="row">
-          <div v-for="author in allAuthors" :key="author.id" class="col-xs-12 col-md-6">
-            <AuthorCard
-              :author="author"
-              @click="router.push(`/author/${author.id}`)"
+          <div v-for="customer in allCustomers" :key="customer.id" class="col-xs-12 col-md-6">
+            <CustomerCard
+              :customer="customer"
+              @click="router.push(`/customer/${customer.id}`)"
             />
           </div>
         </div>
@@ -31,16 +31,16 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
-import { useAuthorsStore } from 'stores/authors';
-import AuthorCard from 'components/authors/AuthorCard.vue';
+import { useCustomersStore } from 'stores/customers';
+import CustomerCard from 'components/customers/CustomerCard.vue';
 
 const router = useRouter();
-const authorsStore = useAuthorsStore();
+const customersStore = useCustomersStore();
 
-const { allAuthors, loading } = storeToRefs(authorsStore);
-const { fetchAuthors } = authorsStore;
+const { allCustomers, loading } = storeToRefs(customersStore);
+const { fetchCustomers } = customersStore;
 
-if (!allAuthors.value.length) {
-  fetchAuthors();
+if (!allCustomers.value.length) {
+  fetchCustomers();
 }
 </script>

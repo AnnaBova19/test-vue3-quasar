@@ -5,12 +5,12 @@
         <q-btn dense flat round icon="edit_note" />
         <q-toolbar-title>
           <router-link exact to="/">
-            <span class="text-bold">Posts App</span>
+            <span class="text-bold">Fashion App</span>
           </router-link>
         </q-toolbar-title>
-        <q-btn stretch flat label="Posts" to="/posts"/>
+        <q-btn stretch flat label="Orders" to="/orders"/>
         <q-separator dark vertical inset />
-        <q-btn stretch flat label="Authors" to="/authors"/>
+        <q-btn stretch flat label="Customers" to="/customers"/>
       </q-toolbar>
     </q-header>
 

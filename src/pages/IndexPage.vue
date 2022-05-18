@@ -1,21 +1,21 @@
 <template>
   <div class="column items-center">
     <div class="flex flex-center app-title bg-grey-3 text-primary">
-      Posts App
+      Fashion App
     </div>
     <q-parallax
-      src="/images/home_first.jpeg"
+      src="/images/home_first.png"
     >
     </q-parallax>
-    <div class="column flex-center app-subtitle q-pa-xl bg-blue-5 text-white">
-      <div>Publish your own posts</div>
+    <div class="column flex-center app-subtitle q-pa-xl bg-red-3 text-white">
+      <div>Make your own order</div>
       <q-btn
         size="lg"
         class="q-mt-xl"
         color="white"
         text-color="primary"
-        label="Create new post"
-        to="new_post" />
+        label="Create new order"
+        to="new_order" />
     </div>
     <q-parallax
       src="/images/home_second.jpeg"
@@ -27,8 +27,8 @@
         class="q-mt-xl"
         color="primary"
         text-color="white"
-        label="See all authors"
-        to="authors" />
+        label="See all customers"
+        to="customers" />
     </div>
   </div>
 </template>

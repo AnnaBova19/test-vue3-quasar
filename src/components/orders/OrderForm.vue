@@ -1,11 +1,12 @@
 <template>
   <q-form
-    class="post-form"
+    class="order-form"
     @submit="onSubmit"
     @reset="onReset">
     <q-input
       outlined
       clearable
+      bg-color="white"
       label="Title *"
       v-model="$v.title.$model"
       @blur="$v.title.$touch"
@@ -15,9 +16,10 @@
     <div class="relative-position q-mt-md q-mb-xl"
       :class="{'q-field--error': $v.body.$error}">
       <q-editor
-        toolbar-push
         v-model="$v.body.$model"
-        placeholder="Type your post here *"
+        toolbar-push
+        toolbar-bg="primary"
+        placeholder="Type your order here *"
         @blur="$v.body.$touch"
         min-height="200px" />
       <div v-if="$v.body.$error" class="q-field__bottom row items-start q-field__bottom--animated">
@@ -38,10 +40,10 @@
 import { reactive, computed, onMounted } from 'vue';
 import { required } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
-import { Post } from 'src/models/Post';
+import { Order } from 'src/models/Order';
 
 const props = defineProps<{
-  post?: Post,
+  order?: Order,
 }>();
 
 const emit = defineEmits(['onPostAction']);
@@ -59,9 +61,9 @@ const rules = computed(() => {
 const $v = useVuelidate(rules, state);
 
 onMounted(() => {
-  if (!!props.post) {
-    state.title = props.post.title;
-    state.body = props.post.body;
+  if (!!props.order) {
+    state.title = props.order.title;
+    state.body = props.order.body;
   }
 });
 
@@ -79,7 +81,7 @@ function onReset(): void {
 </script>
 
 <style lang="scss">
-.post-form {
+.order-form {
   .q-editor__content:empty:not(:focus):before {
     font-size: 16px;
     color: rgba(0, 0, 0, 0.6);

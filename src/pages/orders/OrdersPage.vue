@@ -1,13 +1,13 @@
 <template>
   <q-page padding class="column">
     <div class="row justify-between q-mb-">
-      <div class="text-h3 text-primary">Posts</div>
+      <div class="text-h3 text-primary">Orders</div>
       <q-btn
         class="glossy"
         color="primary"
         icon="add"
-        label="Create new post"
-        to="new_post" />
+        label="Create new order"
+        to="new_order" />
     </div>
 
     <div class="row justify-evenly">
@@ -18,10 +18,10 @@
 
       <div v-else>
         <div class="row">
-          <div v-for="post in postsOnPage" :key="post.id" class="col-xs-12 col-md-6">
-            <PostPreview
-              :post="post"
-              @click="router.push(`/post/${post.id}`)"
+          <div v-for="order in postsOnPage" :key="order.id" class="col-xs-12 col-md-6">
+            <OrderPreview
+              :order="order"
+              @click="router.push(`/order/${order.id}`)"
             />
           </div>
         </div>
@@ -49,28 +49,28 @@
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
-import { usePostsStore } from 'stores/posts';
-import { Post } from 'src/models/Post';
-import PostPreview from 'components/posts/PostPreview.vue';
+import { useOrdersStore } from 'stores/orders';
+import { Order } from 'src/models/Order';
+import OrderPreview from 'components/orders/OrderPreview.vue';
 
 const router = useRouter();
-const postsStore = usePostsStore();
+const ordersStore = useOrdersStore();
 
 const currentPage = ref(1);
 const postsPerPage = ref(10);
 
-const { allPosts, postsQuantity, loading } = storeToRefs(postsStore);
-const { fetchPosts } = postsStore;
+const { allOrders, ordersQuantity, loading } = storeToRefs(ordersStore);
+const { fetchOrders } = ordersStore;
 
 const totalPages = computed<number>(() => {
-  return postsQuantity.value / postsPerPage.value;
+  return ordersQuantity.value / postsPerPage.value;
 });
 
-const postsOnPage = computed<Array<Post>>(() => {
-  return allPosts.value.slice((currentPage.value - 1) * totalPages.value, (currentPage.value - 1) * totalPages.value + totalPages.value);
+const postsOnPage = computed<Array<Order>>(() => {
+  return allOrders.value.slice((currentPage.value - 1) * totalPages.value, (currentPage.value - 1) * totalPages.value + totalPages.value);
 });
 
-if (!allPosts.value.length) {
-  fetchPosts();
+if (!allOrders.value.length) {
+  fetchOrders();
 }
 </script>

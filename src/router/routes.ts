@@ -7,20 +7,30 @@ const routes: RouteRecordRaw[] = [
     redirect: { name: 'home' },
     children: [
       { path: '', component: () => import('pages/IndexPage.vue'), name: 'home' },
-      { path: 'authors', component: () => import('pages/authors/AuthorsPage.vue') },
-      { path: 'author/:id', component: () => import('pages/authors/AuthorPage.vue') },
-      { path: 'posts', component: () => import('pages/posts/PostsPage.vue'), name: 'posts' },
-      { path: 'post/:id', component: () => import('pages/posts/PostPage.vue') },
-      { path: 'post/:id/edit', component: () => import('pages/posts/EditPostPage.vue') },
-      { path: 'new_post', component: () => import('pages/posts/NewPostPage.vue') },
+      { path: 'customers', component: () => import('pages/customers/CustomersPage.vue') },
+      { path: 'customer/:id', component: () => import('pages/customers/CustomerPage.vue') },
+      { path: 'orders', component: () => import('pages/orders/OrdersPage.vue'), name: 'orders' },
+      { path: 'order/:id', component: () => import('pages/orders/OrderPage.vue') },
+      { path: 'order/:id/edit', component: () => import('pages/orders/EditOrderPage.vue') },
+      { path: 'new_order', component: () => import('pages/orders/NewOrderPage.vue') },
     ],
   },
-
+  {
+    path: '/access-denied',
+    component: () => import('pages/errors/403Page.vue'),
+    name: '403',
+  },
+  
+  {
+    path: '/page-not-found',
+    component: () => import('pages/errors/404Page.vue'),
+    name: '404',
+  },
   // Always leave this as last one,
   // but you can also remove it
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
+    redirect: { name: '404' },
   },
 ];
 

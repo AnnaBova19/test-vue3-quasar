@@ -1,5 +1,5 @@
 <template>
-  <q-card class="bg-grey-1 q-ma-md q-pa-sm">
+  <q-card class="bg-red-1 q-ma-md q-pa-sm order-card">
     <div class="row justify-end">
       <q-btn
         v-for="btn in actionBtns" :key="btn.title"
@@ -19,9 +19,9 @@
     <q-card-section>
       <div class="column">
         <div class="text-h5 text-primary text-bold q-mb-md">
-          {{ post.title }}
+          {{ order.title }}
         </div>
-        <div class="text-body1">{{ post.body }}</div>
+        <div class="text-body1">{{ order.body }}</div>
       </div>
     </q-card-section>
 
@@ -35,7 +35,7 @@
         flat
         dense
         :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
-        @click="toggleComments"
+        @click="toggleReviews"
       />
     </q-card-actions>
 
@@ -43,14 +43,21 @@
       <div v-show="expanded">
         <q-separator />
         <q-card-section class="text-subitle2">
-          <q-list v-if="postComments">
-            <CommentItem
-              v-for="(comment, index) in postComments"
-              :key="comment.id"
-              :comment="comment"
-              :has-separator="index !== postComments.length - 1"
+          <q-list v-if="!!reviews.length">
+            <ReviewItem
+              v-for="(review, index) in reviews"
+              :key="review.id"
+              :review="review"
+              :has-separator="index !== reviews.length - 1"
             />
           </q-list>
+
+          <div class="row justify-evenly" v-else>
+            <q-spinner-dots
+              color="accent"
+              size="2.5em"
+            />
+          </div>
         </q-card-section>
       </div>
     </q-slide-transition>
@@ -59,7 +66,7 @@
   <DeleteDialog
     :dialogVisible="deleteDialogVisible"
     @close="deleteDialogVisible = false"
-    @onDeleteAction="deletePost"
+    @onDeleteAction="deleteOrder"
   />
 </template>
 
@@ -67,17 +74,17 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
-import { useCommentsStore } from 'stores/comments';
-import { Post } from 'src/models/Post';
-import CommentItem from 'components/posts/CommentItem.vue';
+import { useReviewsStore } from 'stores/reviews';
+import { Order } from 'src/models/Order';
+import ReviewItem from 'components/orders/ReviewItem.vue';
 import DeleteDialog from 'components/dialogs/DeleteDialog.vue';
 
 const props = defineProps<{
-  post: Post,
+  order: Order,
 }>();
 
 const router = useRouter();
-const commentsStore = useCommentsStore();
+const reviewsStore = useReviewsStore();
 
 const expanded = ref(false);
 const deleteDialogVisible = ref(false);
@@ -86,7 +93,7 @@ const actionBtns = [
     title: 'Edit',
     color: 'primary',
     icon: 'edit',
-    action: () => router.push(`/post/${props.post.id}/edit`),
+    action: () => router.push(`/order/${props.order.id}/edit`),
   },
     {
     title: 'Delete',
@@ -96,19 +103,25 @@ const actionBtns = [
   }
 ];
 
-const { postComments } = storeToRefs(commentsStore);
-const { fetchPostComments } = commentsStore;
+const { reviews } = storeToRefs(reviewsStore);
+const { fetchReviews } = reviewsStore;
 
-function toggleComments(): void {
+function toggleReviews(): void {
   expanded.value = !expanded.value;
-  if (!postComments.value.length) {
-    fetchPostComments(props.post.id);
+  if (!reviews.value.length) {
+    fetchReviews(props.order.id);
   }
 }
 
-function deletePost(): void {
-  // TO DO: delete post
+function deleteOrder(): void {
+  // TO DO: delete order
 }
 
-useCommentsStore().$reset();
+useReviewsStore().$reset();
 </script>
+
+<style scoped lang="scss">
+.order-card {
+  width: 85vw;
+}
+</style>

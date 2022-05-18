@@ -3,7 +3,7 @@
     <q-card>
       <q-card-section class="row items-center">
         <q-avatar icon="delete_outline" color="primary" text-color="white" />
-        <span class="q-ml-sm">Are you sure you want to delete this post?</span>
+        <span class="q-ml-sm">Are you sure you want to delete this order?</span>
       </q-card-section>
 
       <q-card-actions align="right">

@@ -1,35 +1,36 @@
 <template>
-  <q-card class="bg-grey-1 q-ma-md q-pa-sm post-preview">   
+  <q-card class="bg-red-1 q-ma-md q-pa-sm order-preview">   
     <q-card-section>
       <div class="column">
-        <div class="text-h6 text-bold text-no-wrap post-title">
-          {{ post.title }}
+        <div class="text-h6 text-bold text-no-wrap order-title">
+          {{ order.title }}
           <q-tooltip anchor="top start" self="bottom start" :offset="[5,5]">
-            {{ post.title }}
+            {{ order.title }}
           </q-tooltip>
         </div>
-        <div>{{ post.body }}</div>
+        <div>{{ order.body }}</div>
       </div>
     </q-card-section>
   </q-card>
 </template>
 
 <script setup lang="ts">
-import { Post } from 'src/models/Post';
+import { Order } from 'src/models/Order';
 
 defineProps<{
-  post: Post,
+  order: Order,
 }>();
 </script>
 
 <style scoped lang="scss">
-.post-preview {
+.order-preview {
+  min-height: 143px;
   cursor: pointer;
-  .post-title {
+  .order-title {
     color: $primary;
   }
   &:hover {
-    .post-title {
+    .order-title {
       color: $accent;
     }
   }
