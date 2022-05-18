@@ -40,10 +40,10 @@
 .app-title {
   width: 100%;
   height: 300px;
-  font-size: 15vh;
+  font-size: 10vw;
 }
 .app-subtitle {
   width: 100%;
-  font-size: 7vh;
+  font-size: 5vw;
 }
 </style>

@@ -8,7 +8,7 @@
       </q-item-section>
 
       <q-item-section>
-        <q-item-label class="text-h6 text-no-wrap customer-name">
+        <q-item-label class="text-h6 customer-name" :class="{ 'text-no-wrap': $q.screen.gt.sm }">
           {{ customer.name }}
         </q-item-label>
         <q-item-label class="text-overline">{{ `@${customer.username}` }}</q-item-label>
@@ -47,11 +47,14 @@
 </template>
 
 <script setup lang="ts">
+import { useQuasar } from 'quasar';
 import { Customer } from 'src/models/Customer';
 
 defineProps<{
   customer: Customer,
 }>();
+
+const $q = useQuasar();
 </script>
 
 <style scoped lang="scss">
